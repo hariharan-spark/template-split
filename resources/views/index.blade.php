@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <!--**********************************
     Content body start
 ***********************************-->
@@ -554,4 +553,31 @@
     </div>
     <!-- #/ container -->
 </div>
+
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+ <script type="text/javascript">
+  $(document).ready(function() {
+    // toastr.options.timeOut = 1500; // 1.5s
+    @if(Session::has('success'))
+        toastr.options.preventDuplicates = true;
+        swal({
+            title:'Success!',
+            text:"{{Session::get('success')}}",
+            timer:5000,
+            type:'success',
+            return: false
+
+        })
+    @endif
+  });
+ </script>
 @endsection

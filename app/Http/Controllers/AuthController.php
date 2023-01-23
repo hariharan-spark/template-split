@@ -21,7 +21,7 @@ class AuthController extends Controller
 
     public function dashBoard()
     {
-        return view('welcome');
+        return view('index');
     }
 
     public function registerUser(Request $request)
