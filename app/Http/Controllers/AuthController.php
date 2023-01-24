@@ -43,11 +43,12 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
- 
-            return redirect('dashboard')->with('success', 'Login Successfully');
+            return redirect('dashboard')->with('success', 'User Login Successfully');
+        }else if (Auth::guard('admin')->attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect('dashboard')->with('success', 'Admin Login Successfully');
         }
  
         return back()->withErrors([

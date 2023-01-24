@@ -38,13 +38,28 @@
                                     <form class="mt-5 mb-5 login-input" action="{{route('login.register')}}" method="post">
                                         @csrf
                                             <div class="form-group">
-                                                <input type="text" class="form-control"  placeholder="Name" name="name" required>
+                                                <input type="text" id ="name" class="form-control"  placeholder="Name" name="name">
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" class="form-control"  placeholder="Email" name="email" required>
+                                                <input type="email" id="email" class="form-control"  placeholder="Email" name="email">
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control" placeholder="Password" name="password" required>
+                                                <input type="password" id="password" class="form-control" placeholder="Password" name="password">
+                                                @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <button type="submit" class="btn login-form__btn submit w-100">Sign in</button>
                                     </form>
@@ -67,6 +82,43 @@
         <script src="js/styleSwitcher.js"></script>
     </body>
 </html>
+
+<script>
+        $('#name').on('focusout',function() {
+            removeErrorMessage($(this), "invalid-feedback");
+            if($(this).val() == '') {
+                errorMessageShow($(this), 'This field is required', "display:block; margin-bottom:2px;");
+            }
+        });
+        $('#email').on('focusout',function() {
+            removeErrorMessage($(this), "invalid-feedback");
+            if($(this).val() == '') {
+                errorMessageShow($(this), 'This field is required', "display:block; margin-bottom:2px;");
+            }
+
+        });
+        $('#password').on('focusout',function() {
+            removeErrorMessage($(this), "invalid-feedback");
+            if($(this).val() == '') {
+                errorMessageShow($(this), 'This field is required', "display:block; margin-bottom:2px;");
+            }
+
+        });
+
+        function errorMessageShow(element, errorMessage, style = "") {
+            element.parent().append('<p class="validation invalid-feedback text-xs font-sans mt-2 text-red leading-4" style="' + style + ';color:#d32929;">' + errorMessage + '</p>');
+            element.css('border-color', '#d32929');
+            element.next().children().children().addClass('select-color');
+        }
+
+        function removeErrorMessage(attribute, className) {
+            if (attribute.parent().children().hasClass(className)) {
+                attribute.parent().find('.' + className).remove();
+                attribute.css("border-color", "#cbd5e0");
+                attribute.parent().css("border-color", "#cbd5e0");
+            }
+        }
+</script>
 
 
 
