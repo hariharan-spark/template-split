@@ -27,3 +27,9 @@ Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard'
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+Route::get('/select-list', [AuthController::class, 'selectList'])->name('selectList');
+
+
+
+
+

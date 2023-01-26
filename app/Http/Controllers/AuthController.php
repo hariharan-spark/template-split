@@ -66,4 +66,9 @@ class AuthController extends Controller
     
         return redirect('login');
     }
+
+    public function selectList()
+    {
+        return view ('select.select-list');
+    }
 }
