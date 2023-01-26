@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SelectList extends Model
 {
     use HasFactory;
+
+    protected $table ='selectlists';
 }

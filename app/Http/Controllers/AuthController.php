@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SelectList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -70,5 +71,11 @@ class AuthController extends Controller
     public function selectList()
     {
         return view ('select.select-list');
+    }
+
+    public function selectRestaurant($id)
+    {
+        $selectRestaurantLists = SelectList::where('type',$id)->select('name')->get();
+        return response()->json($selectRestaurantLists);
     }
 }

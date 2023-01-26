@@ -17,28 +17,44 @@
                                         <option value="2">Restaurent</option>
                                     </select>
                                 </div>
+                                <div class="form-group province">
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
 </div>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){
-$('#nation_id').change(function($){
-    var tid = $(this).val();;
-    alert(tid);
-    if(tid){
-        
-    }
-});
-});
+            $(document).ready(function(){
+            $('#nation_id').change(function(){
+                var tid = $(this).val();
+                var op=" ";
+
+                if(tid){
+                    $.ajax({
+                    type:"get",
+                    url:"{{url('/select-restaurant')}}/"+tid,
+                    success:function(res)
+                    {
+                            $(".province").empty();
+                            if(res)
+                            {
+                            let html = '<select class="form-control form-control-sm "><option>--Select Res</option>'
+                                $.each(res,function(key,value){
+                                    html += '<option value='+key+'>'+value.name+'</option>';
+                                });
+                                html += '</select>';
+                                $(".province").append(html);
+                            }
+                    }
+                    });
+                }
+            });
+            });
 </script>
-
-
-
 @endsection
 
 
