@@ -78,4 +78,30 @@ class AuthController extends Controller
         $selectRestaurantLists = SelectList::where('type',$id)->select('name')->get();
         return response()->json($selectRestaurantLists);
     }
+
+
+    public function arrayKeyRemoveLogic()
+    {
+        $headers = [
+            'FN' => 'First Name',
+            'LN' => 'Last Name',
+            'CFN' => 'Co First Name',
+            'CLN' => 'Co Last Name',
+            'APPEND5' => 'test',
+            'CLIENT' => 'DSA Account Id',
+            'APPEND6' => 'test1',
+            'APPEND7' => 'test2',
+            ];
+            $newHeadrs = [];
+            foreach ($headers as $key => $header) {
+
+                if (strpos($key, 'APPEND') !== false) {
+                    $rts = str_replace('APPEND', 'IGNORE', $key);
+                    $newHeadrs[$rts] = $header;
+                } else {
+                    $newHeadrs[$key] = $header;
+                }
+            }
+        return $newHeadrs;
+    }
 }
